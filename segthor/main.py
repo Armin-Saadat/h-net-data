@@ -16,7 +16,7 @@ from utils.patient import Patient
 if __name__ == '__main__':
 
     patients = {}
-    for p_id in range(1, 5):
+    for p_id in range(1, 41):
         img_path = os.path.join(SEGTHOR_DATA_DIR, 'Training', 'Patient_' + f'{p_id:02}',
                                 'Patient_' + f'{p_id:02}' + '.nii.gz')
         label_path = os.path.join(SEGTHOR_DATA_DIR, 'Training', 'Patient_' + f'{p_id:02}', 'GT.nii.gz')
