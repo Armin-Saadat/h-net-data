@@ -1,7 +1,7 @@
 # medical-data-handler
 
 
-## Intall
+## Installation:
 
 ```
 git clone https://github.com/Armin-Saadat/h-net-data.git
