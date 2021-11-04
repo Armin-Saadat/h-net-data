@@ -11,12 +11,27 @@ class Patient:
 
     def remove_without_labels(self):
         idx = []
-        for frame_number, label in enumerate(self.labels):
+        for slice_idx, label in enumerate(self.labels):
             if label.max() > 0:
-                idx.append(frame_number)
+                idx.append(slice_idx)
         self.slice_n = len(idx)
         self.images = self.images[idx]
         self.labels = self.labels[idx]
+
+    def remove_paddings(self):
+        idx = []
+        for slice_idx, img in enumerate(self.images):
+            if img.max() > 0:
+                idx.append(slice_idx)
+        self.slice_n = len(idx)
+        self.images = self.images[idx]
+        self.labels = self.labels[idx]
+
+    def normalize(self):
+        min_ = self.images.min()
+        max_ = self.images.max()
+        for slice_idx, img in enumerate(self.images):
+            self.images[slice_idx] = (img - min_) / max_
 
     def print_data_shapes(self):
         print('p_id:', self.id)

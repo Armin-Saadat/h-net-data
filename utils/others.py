@@ -18,7 +18,6 @@ def read_nii_bysitk(input_fid, peel_info=False):
     else:
         return img_np
 
-
 # def save_patients_images(path):
 #     images = {}
 #     for id, patient in patients.items():
@@ -27,17 +26,5 @@ def read_nii_bysitk(input_fid, peel_info=False):
 #         pickle.dump(images, f)
 
 
-# def save_patients_labels(path):
-#     labels = {}
-#     for id, patient in patients.items():
-#         labels[id] = patient.labels
-#     with open(path, 'wb') as f:
-#         pickle.dump(labels, f)
-
-
-# def save_patients_superpixs(path):
-#     superpixs = {}
-#     for id, patient in patients.items():
-#         superpixs[id] = patient.superpixs
-#     with open(path, 'wb') as f:
-#         pickle.dump(superpixs, f)
+# with open(os.path.join(SEGTHOR_DATA_DIR, 'images.pkl'), 'rb') as f:
+#     images = pickle.load(f)
