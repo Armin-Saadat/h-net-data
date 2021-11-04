@@ -1,5 +1,3 @@
 matplotlib
 SimpleITK
-torch
-numpy
 tqdm
