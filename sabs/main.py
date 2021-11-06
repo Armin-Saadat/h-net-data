@@ -25,8 +25,10 @@ import numpy as np
 """
 
 if __name__ == '__main__':
-    patient_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
-                   38, 39, 40]
+    # patient_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+    #                38, 39, 40]
+
+    patient_ids = [1, 2, 3]
 
     patients = {}
     for p_id in patient_ids:
@@ -40,6 +42,7 @@ if __name__ == '__main__':
     labels = []
     for p in patients.values():
         p.remove_paddings()
+        p.resize((256, 256))
         p.normalize()
         images.append(p.images)
         labels.append(p.labels)

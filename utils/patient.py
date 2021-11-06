@@ -1,9 +1,12 @@
+import numpy as np
 import matplotlib.pyplot as plt
+from skimage.transform import resize
 
 
 class Patient:
     def __init__(self, id_, img, label):
         self.id = id_
+        assert img.shape == label.shape, 'image and label should have the same shape.'
         self.slice_n = img.shape[0]
         self.size = img.shape[1:]
         self.images = img
@@ -32,6 +35,11 @@ class Patient:
         max_ = self.images.max()
         for slice_idx, img in enumerate(self.images):
             self.images[slice_idx] = (img - min_) / (max_ - min_)
+
+    def resize(self, output_shape):
+        self.images = resize(self.images, (self.slice_n, output_shape[0], output_shape[1]), anti_aliasing=True)
+        self.labels = resize(self.labels, (self.slice_n, output_shape[0], output_shape[1]), anti_aliasing=False).astype(
+            int).astype(np.float32)
 
     def print_data_shapes(self):
         print('p_id:', self.id)
