@@ -1,5 +1,6 @@
 import os
 import pickle
+import numpy as np
 
 from path_definition import SEGTHOR_DATA_DIR
 from utils.others import read_nii_bysitk
@@ -20,8 +21,8 @@ if __name__ == '__main__':
         img_path = os.path.join(SEGTHOR_DATA_DIR, 'Training', 'Patient_' + f'{p_id:02}',
                                 'Patient_' + f'{p_id:02}' + '.nii.gz')
         label_path = os.path.join(SEGTHOR_DATA_DIR, 'Training', 'Patient_' + f'{p_id:02}', 'GT.nii.gz')
-        img = read_nii_bysitk(img_path)
-        label = read_nii_bysitk(label_path)
+        img = read_nii_bysitk(img_path).astype(np.float32)
+        label = read_nii_bysitk(label_path).astype(np.float32)
         patients[p_id] = Patient(p_id, img, label)
 
     images = []
@@ -35,10 +36,3 @@ if __name__ == '__main__':
         pickle.dump(images, f)
     with open(os.path.join(SEGTHOR_DATA_DIR, 'labels.pkl'), 'wb') as f:
         pickle.dump(labels, f)
-
-        # for k in range(1, 5):
-        #     b = np.copy(p.labels)
-        #     b[np.where(p.labels == k)] = 1
-        #     b[np.where(p.labels != k)] = 0
-
-
