@@ -1,8 +1,11 @@
 import os
+import pickle
 
 from path_definition import SABS_DATA_DIR
 from utils.others import read_nii_bysitk
 from utils.patient import Patient
+
+import numpy as np
 
 """
 (0)	Background
@@ -29,9 +32,19 @@ if __name__ == '__main__':
     for p_id in patient_ids:
         img_path = os.path.join(SABS_DATA_DIR, 'Training', 'img', 'img' + f'{p_id:04}' + '.nii.gz')
         label_path = os.path.join(SABS_DATA_DIR, 'Training', 'label', 'label' + f'{p_id:04}' + '.nii.gz')
-        img = read_nii_bysitk(img_path)
-        label = read_nii_bysitk(label_path)
+        img = read_nii_bysitk(img_path).astype(np.float32)
+        label = read_nii_bysitk(label_path).astype(np.float32)
         patients[p_id] = Patient(p_id, img, label)
 
+    images = []
+    labels = []
     for p in patients.values():
-        p.print_data_shapes()
+        p.remove_paddings()
+        p.normalize()
+        images.append(p.images)
+        labels.append(p.labels)
+
+    with open(os.path.join(SABS_DATA_DIR, 'images.pkl'), 'wb') as f:
+        pickle.dump(images, f)
+    with open(os.path.join(SABS_DATA_DIR, 'labels.pkl'), 'wb') as f:
+        pickle.dump(labels, f)

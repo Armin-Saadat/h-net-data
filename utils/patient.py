@@ -31,7 +31,7 @@ class Patient:
         min_ = self.images.min()
         max_ = self.images.max()
         for slice_idx, img in enumerate(self.images):
-            self.images[slice_idx] = (img - min_) / max_
+            self.images[slice_idx] = (img - min_) / (max_ - min_)
 
     def print_data_shapes(self):
         print('p_id:', self.id)

@@ -28,6 +28,7 @@ if __name__ == '__main__':
     images = []
     labels = []
     for p in patients.values():
+        p.remove_paddings()
         p.normalize()
         images.append(p.images)
         labels.append(p.labels)
