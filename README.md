@@ -11,3 +11,11 @@ pip install --upgrade virtualenv
 source ./venv/bin/activate
 pip install -r requirements.txt
 ```
+
+
+## Run:
+
+```
+source ./venv/bin/activate
+python -m dataset_name.main
+```
